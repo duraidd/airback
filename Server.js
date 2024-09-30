@@ -15,7 +15,7 @@ app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 
 var whitelist = [ 
-  'https://schooltask.vercel.app','http://localhost:3000'
+  'https://airfront.vercel.app','http://localhost:3000'
 ];
 
 var corsOptions = {
