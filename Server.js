@@ -53,9 +53,9 @@ app.use("/airdeal", Api);
 app.use(morgan("common"));
 
 
-app.get("/", (req, res) => {
-  res.json({ lol: "123" });
-});
+// app.get("/", (req, res) => {
+//   res.json({ lol: "123" });
+// });
 
 app.options("*", cors(corsOptions));
 app.listen(9999, () => {
