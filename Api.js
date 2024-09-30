@@ -49,35 +49,35 @@ router.post('/upload', upload.single('image'), async (req, res) => {
 
             if (converted_data.Name && converted_data.JobTitle && converted_data.CompanyName && converted_data.Email && converted_data.PhoneNumber && converted_data.Address) {
 
-            let obj = {
-                Name: converted_data?.Name || "-",
-                JobTitle: converted_data?.JobTitle || "-",
-                CompanyName: converted_data?.CompanyName || "-",
-                Email_Address: converted_data?.Email || "-",
-                PhoneNumber: converted_data?.PhoneNumber || "-",
-                image_path: cb,
-                Address: converted_data?.Address || "-"
-            }
-
-            await usermodal.find({
-                $and: [{
-                    Name: converted_data.Name,
-                    JobTitle: converted_data.JobTitle,
-                    CompanyName: converted_data.CompanyName,
-                    Email_Address: converted_data.Email,
-                    PhoneNumber: converted_data.PhoneNumber,
+                let obj = {
+                    Name: converted_data?.Name || "-",
+                    JobTitle: converted_data?.JobTitle || "-",
+                    CompanyName: converted_data?.CompanyName || "-",
+                    Email_Address: converted_data?.Email || "-",
+                    PhoneNumber: converted_data?.PhoneNumber || "-",
                     image_path: cb,
-                    Address: converted_data.Address
-                }]
-            }).then(async (ddd) => {
-                if (ddd.length <= 0) {
-                    await usermodal.create(obj).then((resd) => {
-                        res.json({ status: 200, msg: "Details added successfully" });
-                    });
-                } else {
-                    res.json({ status: 400, msg: "Details of this visiting card is already exist" });
+                    Address: converted_data?.Address || "-"
                 }
-            });
+
+                await usermodal.find({
+                    $and: [{
+                        Name: converted_data.Name,
+                        JobTitle: converted_data.JobTitle,
+                        CompanyName: converted_data.CompanyName,
+                        Email_Address: converted_data.Email,
+                        PhoneNumber: converted_data.PhoneNumber,
+                        image_path: cb,
+                        Address: converted_data.Address
+                    }]
+                }).then(async (ddd) => {
+                    if (ddd.length <= 0) {
+                        await usermodal.create(obj).then((resd) => {
+                            res.json({ status: 200, msg: "Details added successfully" });
+                        });
+                    } else {
+                        res.json({ status: 400, msg: "Details of this visiting card is already exist" });
+                    }
+                });
 
 
             } else {
@@ -90,6 +90,7 @@ router.post('/upload', upload.single('image'), async (req, res) => {
 
 async function sample(data, cb) {
     if (data && data.path) {
+        console.log("data", data);
         cb(data.path);
     }
 }
